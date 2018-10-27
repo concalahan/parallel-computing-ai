@@ -57,4 +57,11 @@ class Parser():
 
         url = url[0]['href']
 
-        print("url " + url)
+        description_temp = soup.findAll("div", {"class": "post-main__inner"})
+
+        product_description = ''
+        if len(description_temp) != 0:
+            product_description = h.handle(str(description_temp[0]))
+
+        self.data['url'] = url
+        self.data['description'] = product_description

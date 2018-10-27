@@ -13,7 +13,7 @@ NOW = datetime.datetime.now()
 # read data from this directory
 READ_DIR = '../data/raw/'
 # write data from this directory
-WRITE_DIR = './data/json/'
+WRITE_DIR = '../data/json/'
 
 
 class Filter():
@@ -53,6 +53,6 @@ class Filter():
                 if 'trustedreviews' in filename:
                     trustedreviews_parser.parseProductFromTrustedReviews(filename, fp)
                     self.write_file('trustedreviews', trustedreviews_parser.count, trustedreviews_parser.get_data())
-                    tiki_parser.count += 1
+                    trustedreviews_parser.count += 1
                 else:
                     continue

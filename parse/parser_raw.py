@@ -45,7 +45,7 @@ def parser_main():
                 dataTemp = urllib.request.Request(url, headers=headers)
                 data = urllib.request.urlopen(dataTemp).read()
                 soup = BeautifulSoup(data, "lxml")
-                writeFile('stream', soup, i)
+                writeFile('trustedreviews', soup, i)
 
                 i += 1
             except HTTPError as e:

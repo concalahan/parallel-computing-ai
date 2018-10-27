@@ -12,9 +12,9 @@ import urllib
 sys.path.append(os.path.realpath('..'))
 
 # save to this directory
-READ_DIR = './data/url/'
+READ_DIR = '../data/url/'
 
-WRITE_DIR = './data/raw/'
+WRITE_DIR = '../data/raw/'
 
 def create_project_dir(directory):
     if not os.path.exists(directory):

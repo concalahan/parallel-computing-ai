@@ -18,9 +18,9 @@ class RustSpider(scrapy.Spider):
     export_urls = []
 
     # add domain here
-    allowed_domains = ["stream-hub.com"]
+    allowed_domains = ["trustedreviews.com"]
     start_urls = (
-        'http://stream-hub.com/',
+        'https://www.trustedreviews.com',
     )
 
     def create_project_dir(self, directory):
@@ -44,7 +44,8 @@ class RustSpider(scrapy.Spider):
             self.create_project_dir(WRITE_DIR)
             self.isCreateFolder = True
 
-        extractor = LinkExtractor(allow_domains='stream-hub.com')
+        # pattern
+        extractor = LinkExtractor(allow_domains=self.allowed_domains, allow=r"/news/.*")
         links = extractor.extract_links(response)
         items = []
         

@@ -53,9 +53,7 @@ class Parser():
 
         title = soup.findAll("title")
 
-        # if no canonical url found, skip the iteration
-        if len(url) == 0:
-            return
+        title = title[0].text
 
         description_temp = soup.findAll("div", {"class": "post-main__inner"})
 
@@ -63,6 +61,17 @@ class Parser():
         if len(description_temp) != 0:
             product_description = h.handle(str(description_temp[0]))
 
-        self.data['result'] = 0
-        self.data['title'] = title[0].text
-        self.data['description'] = product_description
+        # if no canonical url found, skip the iteration
+        if len(url) == 0:
+            return
+
+        if('apple' in title or 'samsung' in title or 'xiaomi' in title or 'google' in title
+            or 'apple' in product_description or 'samsung' in product_description or 'xiaomi' in product_description or 'google' in product_description):
+            
+            product_description = product_description.replace('\n', '').replace('\r', '')
+
+            product_description = re.sub('((https|http)?:\/\/.*\.(?:svg|:jpg|:png))', '', product_description.strip())
+            
+            self.data['result'] = 0
+            self.data['title'] = title
+            self.data['description'] = product_description

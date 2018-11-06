@@ -51,11 +51,11 @@ class Parser():
         # all sites share this
         url = soup.findAll("link", {"rel": "canonical"})
 
+        title = soup.findAll("title")
+
         # if no canonical url found, skip the iteration
         if len(url) == 0:
             return
-
-        url = url[0]['href']
 
         description_temp = soup.findAll("div", {"class": "post-main__inner"})
 
@@ -63,5 +63,6 @@ class Parser():
         if len(description_temp) != 0:
             product_description = h.handle(str(description_temp[0]))
 
-        self.data['url'] = url
+        self.data['result'] = 0
+        self.data['title'] = title[0].text
         self.data['description'] = product_description

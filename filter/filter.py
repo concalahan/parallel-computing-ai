@@ -48,11 +48,12 @@ class Filter():
         trustedreviews_parser = Parser()
 
         for filename in os.listdir(READ_DIR):
-            print("Processing file: " + str(filename))
             with open(READ_DIR + filename, encoding='utf-8') as fp:
                 if 'trustedreviews' in filename:
                     trustedreviews_parser.parseProductFromTrustedReviews(filename, fp)
-                    self.write_file('trustedreviews', trustedreviews_parser.count, trustedreviews_parser.get_data())
-                    trustedreviews_parser.count += 1
+
+                    if(trustedreviews_parser.get_data() != None):
+                        self.write_file('trustedreviews', trustedreviews_parser.count, trustedreviews_parser.get_data())
+                        trustedreviews_parser.count += 1
                 else:
                     continue

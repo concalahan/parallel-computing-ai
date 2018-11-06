@@ -37,7 +37,8 @@ class Parser():
         return result
 
     def get_data(self):
-        return self.data
+        if(self.data['title'] != ''):
+            return self.data
 
     def parseProductFromTrustedReviews(self, filename, fp):
         soup = BeautifulSoup(fp, 'lxml')
@@ -68,6 +69,8 @@ class Parser():
         if('apple' in title or 'samsung' in title or 'xiaomi' in title or 'google' in title
             or 'apple' in product_description or 'samsung' in product_description or 'xiaomi' in product_description or 'google' in product_description):
             
+            print("Process " + title)
+
             product_description = product_description.replace('\n', '').replace('\r', '')
 
             product_description = re.sub('((https|http)?:\/\/.*\.(?:svg|:jpg|:png))', '', product_description.strip())
@@ -75,3 +78,5 @@ class Parser():
             self.data['result'] = 0
             self.data['title'] = title
             self.data['description'] = product_description
+        else: 
+            self.data['title'] = ''
